@@ -46,6 +46,8 @@ A single-file copy and an optional Python-bridge version are in [`service-tool/`
 
 Caveat to note when buying used pigtail harnesses for bench testing is that the E85 Z4 apparently switched to using Bosch ABS controllers (in late build date models) in place of the original Continental Teves MK60e5 controllers. Very frustratingly, both use 47P connectors from Tyco/AMP which look *almost* identical at a quick glance… Do not make the same mistake I did, verify the breakers are sending you the correct connector as seen below:
 
+<img width="6200" height="5000" alt="amp_47p_connectors_anno" src="https://github.com/user-attachments/assets/aa4c8bae-b535-4c05-a105-a2661340f516" />
+
 (I also recommend saving yourself the trouble of dealing with the gross sticky electrical tape (🤢) on the old OEM harnesses by buying a new wiring harness kit directly from [Tulay’s Wire Werks](https://tulayswirewerks.com/product/teves-mk60-abs-connector-kit/) !)
 
 ##### E85 Z4 MK60E5
