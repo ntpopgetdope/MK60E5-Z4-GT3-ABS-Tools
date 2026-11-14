@@ -42,7 +42,7 @@ A single-file copy and an optional Python-bridge version are in [`service-tool/`
 
 ## Wiring
 
-##### E84 Z4 ABS Connector Variation
+##### E85 Z4 ABS Connector Variation
 
 Caveat to note when buying used pigtail harnesses for bench testing is that the E85 Z4 apparently switched to using Bosch ABS controllers (in late build date models) in place of the original Continental Teves MK60e5 controllers. Very frustratingly, both use 47P connectors from Tyco/AMP which look *almost* identical at a quick glance… Do not make the same mistake I did, verify the breakers are sending you the correct connector as seen below:
 
