@@ -42,57 +42,65 @@ A single-file copy and an optional Python-bridge version are in [`service-tool/`
 
 ## Wiring
 
-##### Z4 MK60E5
+##### E84 Z4 ABS Connector Variation
 
-| Pin | Usage | Notes |
-|-----|-------|-------|
-| 1 | Power | 12v 30 amps |
-| 2 | K-Line | Required for diagnostics |
-| 3 | Brake Fluid Level | Splice to ground; fluid monitor not used by firmware |
-| 4 | Brake Switch Input | Ground normally, open on pedal press; ABS uses master pressure, not this switch |
-| 5 |  |  |
-| 6 |  |  |
-| 7 |  |  |
-| 8 |  |  |
-| 9 |  |  |
-| 10 |  |  |
-| 11 | F CAN High | Yaw sensor CAN High (yaw + accel; not steering) |
-| 12 |  |  |
-| 13 |  |  |
-| 14 |  |  |
-| 15 | PT CAN Low | For Datalog |
-| 16 | Ground |  |
-| 17 | Switched Power | 12v 5 amps, spliced to 29 |
-| 18 |  |  |
-| 19 |  |  |
-| 20 |  |  |
-| 21 |  |  |
-| 22 |  |  |
-| 23 |  |  |
-| 24 |  |  |
-| 25 |  |  |
-| 26 | F CAN Low | Yaw sensor CAN Low |
-| 27 | PT CAN Ground | Yaw sensor ground |
-| 28 |  |  |
-| 29 | Switched Power | 12v 5 amps, wakeup, spliced to 17, can be switched for ABS on / off |
-| 30 | PT CAN High | For data logging |
-| 31 |  |  |
-| 32 | Power | 12v 30 amps |
-| 33 | FR Wheel Speed Signal |  |
-| 34 | FR Wheel Speed Power |  |
-| 35 |  |  |
-| 36 | RL Wheel Speed Power |  |
-| 37 | RL Wheel Speed Signal |  |
-| 38 | Parking Brake | Splice to ground; not read by firmware |
-| 39 | PT CAN Power | Yaw sensor 12v |
-| 40 |  |  |
-| 41 |  |  |
-| 42 | RR Wheel Speed Signal |  |
-| 43 | RR Wheel Speed Power |  |
-| 44 | ABS Error Light | ABS warning lamp output |
-| 45 | FL Wheel Speed Power |  |
-| 46 | FL Wheel Speed Signal |  |
-| 47 | Ground |  |
+Caveat to note when buying used pigtail harnesses for bench testing is that the E85 Z4 apparently switched to using Bosch ABS controllers (in late build date models) in place of the original Continental Teves MK60e5 controllers. Very frustratingly, both use 47P connectors from Tyco/AMP which look *almost* identical at a quick glance… Do not make the same mistake I did, verify the breakers are sending you the correct connector as seen below:
+
+(I also recommend saving yourself the trouble of dealing with the gross sticky electrical tape (🤢) on the old OEM harnesses by buying a new wiring harness kit directly from [Tulay’s Wire Werks](https://tulayswirewerks.com/product/teves-mk60-abs-connector-kit/) !)
+
+##### E85 Z4 MK60E5
+
+[^1]: Harness wire colours were referenced from a junkyard BMW `6954572-01` harness, which uses a Tyco/AMP connector marked both as [2-1241659-1](#) & [2-1241663-3](#) which is a customer specific Pwr Quadlok/MQS aka “PQ KAMMBLOCK47P”. N.B. I have been screwed *twice* by the breaker yard, initially they sent a harness from a later E85 Z4 which uses a Bosch ABS unit instead of the Continental Teves MK60e5’s… then they sent whatever the hell this harness is (it appears to be from a E91 320d) which is obvious as it did not have pin 2 populated for K-line so it very clearly wasn’t out of a Z4! as such I have depinned the unused pin 3 and swapped it into pin 2 for simplicity when bench testing the Z4 unit.
+
+| Pin | Usage | Wire Colour | Notes | Twisted  Pair? |
+|-----|-------|-------|-------|-------|
+| 1 | Power | Red/Yellow | 12v 30 amps |  |
+| 2 | K-Line | ??? [^1] | Required for diagnostics |  |
+| 3 | Brake Fluid Level | Brown/Green<br />(Yellow Stripe) | Splice to ground; fluid monitor not used by firmware |  |
+| 4 | Brake Switch Input | Red/Blue | Ground normally, open on pedal press; ABS uses master pressure, not this switch |  |
+| 5 |  | Purple/Yellow |  |  |
+| 6 |  | Unpopulated |  |  |
+| 7 |  | Unpopulated |  |  |
+| 8 |  | Unpopulated |  |  |
+| 9 |  | Purple/Black |  |  |
+| 10 |  | Unpopulated |  |  |
+| 11 | F CAN High | Yellow/White | Yaw sensor CAN High (yaw + accel; not steering) | Yes (11+26) |
+| 12 |  | Unpopulated |  |  |
+| 13 |  | Unpopulated |  |  |
+| 14 |  | Unpopulated |  |  |
+| 15 | PT CAN Low | Red | For Datalog | Yes (15+30) |
+| 16 | Ground | Brown |  |  |
+| 17 | Switched Power | Red/Grey | 12v 5 amps, spliced to 29 |  |
+| 18 |  | Unpopulated |  |  |
+| 19 |  | Unpopulated |  |  |
+| 20 |  | Unpopulated |  |  |
+| 21 |  | Yellow/Black |  |  |
+| 22 |  | Unpopulated |  |  |
+| 23 |  | Unpopulated |  |  |
+| 24 |  | Unpopulated |  |  |
+| 25 |  | Red/Yellow |  |  |
+| 26 | F CAN Low | Blue/White | Yaw sensor CAN Low | Yes (11+26) |
+| 27 | PT CAN Ground | Blue/White<br />(Yellow Stripe) | Yaw sensor ground |  |
+| 28 |  | Unpopulated |  |  |
+| 29 | Switched Power | Red/Green | 12v 5 amps, wakeup, spliced to 17, can be switched for ABS on / off |  |
+| 30 | PT CAN High | Red/Blue | For data logging | Yes (15+30) |
+| 31 |  | Unpopulated |  |  |
+| 32 | Power | Red/Blue | 12v 30 amps |  |
+| 33 | FR Wheel Speed Signal | Brown |  | Yes (33+34) |
+| 34 | FR Wheel Speed Power | Yellow |  | Yes (33+34) |
+| 35 |  | Unpopulated |  |  |
+| 36 | RL Wheel Speed Power | Blue |  | Yes (36+37) |
+| 37 | RL Wheel Speed Signal | Brown |  | Yes (36+37) |
+| 38 | Parking Brake | Blue/Brown<br />(Yellow Stripe) | Splice to ground; not read by firmware |  |
+| 39 | PT CAN Power | Red/Black<br />(White Stripe) | Yaw sensor 12v |  |
+| 40 |  | Yellow/Black |  |  |
+| 41 |  | Unpopulated |  |  |
+| 42 | RR Wheel Speed Signal | Brown/Yellow |  | Yes (42+43) |
+| 43 | RR Wheel Speed Power | Black/Yellow |  | Yes (42+43) |
+| 44 | ABS Error Light | Unpopulated | ABS warning lamp output |  |
+| 45 | FL Wheel Speed Power | Red/Brown |  | Yes (45+46) |
+| 46 | FL Wheel Speed Signal | Brown |  | Yes (45+46) |
+| 47 | Ground | Brown |  |  |
 
 ##### VW Yaw Sensor
 
